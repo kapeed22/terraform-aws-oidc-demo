@@ -15,7 +15,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Configure AWS Credentials
+      - name: Configure AWS Credentials via OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
@@ -24,9 +24,11 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
+          terraform_version: "1.7.0"
           terraform_wrapper: false
 
-      - name: Terraform Init & Apply
+      - name: Run Terraform Direct
         run: |
           terraform init
+          terraform validate
           terraform apply -auto-approve
