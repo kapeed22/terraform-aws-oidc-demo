@@ -18,6 +18,6 @@ resource "aws_instance" "simple_ec2" {
   subnet_id     = "subnet-009f6ad49f333e577"
 
   tags = {
-    Name = "Simple-OIDC-EC2"
+    Name = "Simple-OIDC-ECC"
   }
 }
