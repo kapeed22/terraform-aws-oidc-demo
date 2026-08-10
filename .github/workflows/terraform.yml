@@ -28,6 +28,7 @@ jobs:
           terraform_wrapper: false
 
       - name: Run Terraform Direct
+        working-directory: ./terraform
         run: |
           terraform init
           terraform validate
