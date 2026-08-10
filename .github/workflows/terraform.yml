@@ -1,27 +1,27 @@
-name: Deploy Terraform EC2
+name: Deploy Simple EC2
 
 on:
   push:
     branches: [ "main" ]
 
 permissions:
-  id-token: write   # MANDATORY: Allows GitHub to issue the OIDC JWT token
-  contents: read    # MANDATORY: Allows checking out code
+  id-token: write
+  contents: read
 
 jobs:
   terraform-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository Code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Configure AWS Credentials via OIDC
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: us-east-1
 
-      - name: Setup Terraform CLI
+      - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_wrapper: false
