@@ -36,6 +36,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "demo" {
   ami           = data.aws_ami.ubuntu.id # References the dynamically fetched AMI ID
   instance_type = "t2.micro"
+  subnet_id     = "subnet-009f6ad49f333e577"
 
   tags = {
     Name = "OIDC-Demo-EC2"
